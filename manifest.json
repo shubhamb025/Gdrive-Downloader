@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Drive PDF Downloader",
+  "version": "1.0",
+  "description": "Capture images from Drive viewer and convert to a PDF inside the browser.",
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://drive.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://drive.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["pdf-lib.umd.min.js", "inject.js"],
+      "matches": ["https://drive.google.com/*"]
+    }
+  ],
+  "icons": {
+    "48": "icon.png"
+  }
+}
+
